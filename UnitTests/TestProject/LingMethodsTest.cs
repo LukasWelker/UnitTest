@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using LinqMethod;
+using FluentAssertions;
 namespace TestProject
 {
     
@@ -59,7 +60,7 @@ namespace TestProject
             //Assert
             CollectionAssert.AreEqual(expectedValue, result);
         }
-       
+        [TestMethod]
         public void ShouldReturnIndex()
         {
             //Arrange
@@ -70,8 +71,10 @@ namespace TestProject
             LinqMethods foo = new LinqMethods();
             //Act
             var result = foo.LinqMethod5(arr1, filter);
-            Assert.AreEqual(expectedOutput, result);
+            //Assert
+            //Assert.AreEqual(expectedOutput, result);
             //Buildet alles in der Projektmappe Shortcut: Strg, Shift, B
+            result.Should().StartWith("tiger").And.ContainEquivalentOf(expectedOutput);
         }
        
         public void ShouldReturnOddNumber()
@@ -87,9 +90,12 @@ namespace TestProject
             //Assert
             //CollectionAssert.AreEqual(expectedList, result);
             //or
-            Assert.IsTrue(result.All(e => expectedList.Contains(e)));
+            //Assert.IsTrue(result.All(e => expectedList.Contains(e)));
+            //or(usingFluentAssertions)
+            result.Should().HaveSameCount(expectedList).And.ContainInOrder(expectedList);
+
         }
-       
+        [TestMethod]
         public void ShouldReturnNumbersInAscendingOrder()
         {
             //Arrange
@@ -100,7 +106,9 @@ namespace TestProject
             var result = baaaa.LinqMethod7(startingList);
 
             //Assert
-            CollectionAssert.AreEqual(expectedList, result);
+            //CollectionAssert.AreEqual(expectedList, result);
+            //or if(using FluentAssertion) + many different versions
+            result.Should().StartWith(1).And.ContainInOrder(expectedList).And.EndWith(12).And.BeInAscendingOrder().And.HaveSameCount(startingList);
         }
        
         public void ShouldReturnCountOfEachNumber()
@@ -134,6 +142,7 @@ namespace TestProject
             //or
             //Assert.IsTrue(result.All(x=> expectedList.Contains(x)));
         }
+       
         public void ShouldReturnListWithCondition()
         {
             //Assert
@@ -143,17 +152,22 @@ namespace TestProject
             listOfString.Add("o");
             listOfString.Add("p");
             listOfString.Add("q");
+            //ArrayCount is 4
             List<string> expectedListOfString = new List<string>() { "m", "n", "o", "p" };
             LinqMethods foooo = new LinqMethods();
             //Act
             var result = foooo.LinqMethod10(listOfString);
 
             //Assert
-            CollectionAssert.AreEqual(expectedListOfString, result);
+            //CollectionAssert.AreEqual(expectedListOfString, result);
+            //or (using FluentAssertions)
+            result.Should().StartWith("m").And.Contain("n").And.Contain("o").And.EndWith("p").And.HaveCount(4);
+            //or
+            result.Should().ContainInOrder(expectedListOfString).And.HaveCount(4);
 
         }
 
-        [TestMethod]
+        
         public void ShouldReturnNumberAndFrequency()
         {
             //Arrange
@@ -165,9 +179,12 @@ namespace TestProject
             var result = fo.LinqMethod11(nums);
 
             //Assert
-            CollectionAssert.AreEqual(expectedOutput, result);
+            //CollectionAssert.AreEqual(expectedOutput, result);
             //or
-            Assert.IsTrue(result.All(e => expectedOutput.Contains(e)));
+            //Assert.IsTrue(result.All(e => expectedOutput.Contains(e)));
+            //or if(using FluentAssertions)
+            result.Should().ContainInOrder(expectedOutput).And.HaveCount(9);
+
         }
     }
 }

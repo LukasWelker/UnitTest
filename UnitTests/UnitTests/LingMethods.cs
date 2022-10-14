@@ -79,6 +79,9 @@ namespace LinqMethod
         }
         public List<string> LinqMethod11(int[] nums)
         {
+            if (nums is null)
+                throw new ArgumentNullException(nameof(nums));
+
             var filtered = nums
                 .GroupBy(x => x)
                 .Select(y =>$"{y.Key}:{y.Count()}:{y.Key*y.Count()}")
