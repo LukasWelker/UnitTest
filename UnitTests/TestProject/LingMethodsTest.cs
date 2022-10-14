@@ -116,7 +116,7 @@ namespace TestProject
             //Assert
             CollectionAssert.AreEqual(expectedOutput, result);
         }
-        [TestMethod]
+     
         public void ShouldReturnAllNumbersGreaterThanCondition()
         {
             //Arrange
@@ -146,10 +146,28 @@ namespace TestProject
             List<string> expectedListOfString = new List<string>() { "m", "n", "o", "p" };
             LinqMethods foooo = new LinqMethods();
             //Act
-            var result = foooo.LinqMethod10(listOfString)
+            var result = foooo.LinqMethod10(listOfString);
+
+            //Assert
+            CollectionAssert.AreEqual(expectedListOfString, result);
 
         }
 
+        [TestMethod]
+        public void ShouldReturnNumberAndFrequency()
+        {
+            //Arrange
+            int[] nums = new int[] { 5, 1, 9, 2, 3, 7, 4, 5, 6, 8, 7, 6, 3, 4, 5, 2 };
+            List<string> expectedOutput = new List<string>() { "5:3:15", "1:1:1", "9:1:9", "2:2:4", "3:2:6", "7:2:14", "4:2:8", "6:2:12", "8:1:8" };
+            LinqMethods fo = new LinqMethods();
 
+            //Act
+            var result = fo.LinqMethod11(nums);
+
+            //Assert
+            CollectionAssert.AreEqual(expectedOutput, result);
+            //or
+            Assert.IsTrue(result.All(e => expectedOutput.Contains(e)));
+        }
     }
 }

@@ -71,9 +71,20 @@ namespace LinqMethod
             var filtered = startingList.Where(x => x> inputCondition).ToList();
             return filtered;
         }
-        public void LinqMethod10(List<string> listOfString)
+        public List<string> LinqMethod10(List<string> listOfString)
         {
             var filtered = listOfString.FirstOrDefault(x =>x == "q");
+            listOfString.Remove(filtered);
+            return listOfString;
+        }
+        public List<string> LinqMethod11(int[] nums)
+        {
+            var filtered = nums
+                .GroupBy(x => x)
+                .Select(y =>$"{y.Key}:{y.Count()}:{y.Key*y.Count()}")
+                .ToList();
+            return filtered;
+
         }
       
     }
