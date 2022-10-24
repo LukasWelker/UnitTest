@@ -31,6 +31,11 @@ namespace LinqMethod
             var filtered = stringAnswer.Where(x => x == x.ToUpper());
             return filtered.ToList();
         }
+        /// <summary>
+        /// Gute Erklärung (für das Verständnis von Linq)
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public List<string> LinqMethod4(string value)
         {
             var filtered = value
