@@ -135,7 +135,7 @@ namespace TestProject
 
             //Act
             var result = foooo.LinqMethod9(startingList, inputCondition);
-
+            
             //Assert
 
             CollectionAssert.AreEqual(expectedList, result);
